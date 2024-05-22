@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Mi Aplicación de Recetas{% endblock %}</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/estilos.css" />
+</head>
+
+<body>
+  {% include 'menu.njk' %}
+  <div class="container mt-4">
+    <h1>{% block heading %}{% endblock %}</h1>
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</body>
+
+</html>

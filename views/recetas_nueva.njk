@@ -1,0 +1,35 @@
+{% extends "base.njk" %}
+
+{% block title %}Nueva Receta{% endblock %}
+
+{% block heading %}Nueva Receta{% endblock %}
+
+{% block content %}
+<form action="/recetas" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="titulo">Título:</label>
+    <input type="text" class="form-control" id="titulo" name="titulo" required>
+  </div>
+  <div class="form-group">
+    <label for="imagen">Imagen:</label>
+    <input type="file" class="form-control" id="imagen" name="imagen">
+  </div>
+  <div class="form-group">
+    <label for="comensales">Número de Comensales:</label>
+    <input type="number" class="form-control" id="comensales" name="comensales" required min="1">
+  </div>
+  <div class="form-group">
+    <label for="preparacion">Tiempo de Preparación (minutos):</label>
+    <input type="number" class="form-control" id="preparacion" name="preparacion" min="1">
+  </div>
+  <div class="form-group">
+    <label for="coccion">Tiempo de Cocción (minutos):</label>
+    <input type="number" class="form-control" id="coccion" name="coccion" required min="0">
+  </div>
+  <div class="form-group">
+    <label for="descripcion">Descripción:</label>
+    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar Receta</button>
+</form>
+{% endblock %}

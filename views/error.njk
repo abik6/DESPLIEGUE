@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Error</h1>
+    <div class="alert alert-danger">
+      {% if error %}
+      {{ error|safe }}
+      {% else %}
+      Ha ocurrido un error en la aplicación
+      {% endif %}
+    </div>
+  </div>
+</body>
+
+</html>

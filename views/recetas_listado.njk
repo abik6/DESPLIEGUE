@@ -1,0 +1,47 @@
+{% extends "base.njk" %}
+
+{% block title %}Recetas | Listado{% endblock %}
+
+{% block heading %}Listado de Recetas{% endblock %}
+
+{% block content %}
+<div class="row">
+  {% for receta in recetas %}
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      {% if receta.imagen %}
+      <img src="/public/images/{{ receta.imagen }}" class="card-img-top" alt="{{ receta.titulo }}">
+      {% endif %}
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h5 class="card-title">{{ receta.titulo }}</h5>
+          </div>
+          <div class="col-auto">
+            <p class="card-text">{{ receta.descripcion }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a href="/recetas/{{ receta._id }}" class="btn btn-primary">Ver Ficha</a>
+          </div>
+          {% if (session and session.usuario) %}
+          <div class="col-auto">
+            <a class="btn btn-warning" href="/recetas/editar/{{ receta.id }}">Editar</a>
+          </div>
+          <div class="col-auto">
+            <form action="/recetas/{{ receta.id }}" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="btn btn-danger"
+                onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?')">Borrar</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.njk" %}
+
+{% block title %}Nuevo Ingrediente{% endblock %}
+
+{% block heading %}Nuevo Ingrediente{% endblock %}
+
+{% block content %}
+  <form action="/recetas/{{receta._id}}/ingredientes" method="post">
+    <div class="form-group">
+      <label for="nombre">Nombre del Ingrediente:</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    <div class="form-group">
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" class="form-control" id="cantidad" name="cantidad" required min="0">
+    </div>
+    <div class="form-group">
+      <label for="unidad">Unidad:</label>
+      <select class="form-control" id="unidad" name="unidad" required>
+        <option value="gr">gramos</option>
+        <option value="cucharadas">cucharadas</option>
+        <option value="unidades">unidades</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Ingrediente</button>
+  </form>
+{% endblock %}

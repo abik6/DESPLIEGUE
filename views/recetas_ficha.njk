@@ -1,0 +1,48 @@
+{% extends "base.njk" %}
+
+{% block title %}Ficha de Receta: {{ receta.titulo }}{% endblock %}
+
+{% block heading %}Ficha de Receta: {{ receta.titulo }}{% endblock %}
+
+{% block content %}
+<div class="card">
+  {% if receta.imagen %}
+  <img src="/public/images/{{ receta.imagen }}" class="card-img-top" alt="{{ receta.titulo }}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ receta.titulo }}</h5>
+    <p class="card-text"><strong>Comensales:</strong> {{ receta.comensales }}</p>
+    <p class="card-text"><strong>Tiempo de preparación:</strong> {{ receta.preparacion }} minutos</p>
+    <p class="card-text"><strong>Tiempo de cocción:</strong> {{ receta.coccion }} minutos</p>
+    <p class="card-text"><strong>Descripción:</strong> {{ receta.descripcion }}</p>
+    {% if receta.ingredientes.length > 0 %}
+    <h5>Ingredientes:</h5>
+    <ul class="list-group">
+      {% for ingrediente in receta.ingredientes %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ ingrediente.nombre }} - {{ ingrediente.cantidad }} {{ ingrediente.unidad }}
+        <div class="btn-group" role="group" aria-label="Editar y Borrar">
+          <form action="/recetas/{{receta._id}}/ingredientes/{{ingrediente._id}}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+          </form>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay ingredientes para esta receta.</p>
+    {% endif %}
+    {% if (session and session.usuario) %}
+    <a href="/recetas/editar/{{ receta._id }}" class="btn btn-warning">Editar</a>
+
+    <form action="/recetas/{{ receta._id }}" method="post" style="display: inline;">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger"
+        onclick="return confirm('¿Estás seguro de que deseas eliminar esta receta?')">Borrar</button>
+    </form>
+    <a href="/recetas/{{ receta._id }}/ingredientes/nuevo" class="btn btn-success">Añadir Ingredientes</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
